@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function Movies() {
+export default function Movies({ title, dateOfRealease }) {
 	return (
 		<div>
-			<div>Movies</div>
+			{title}
+			{dateOfRealease}
 		</div>
 	);
 }

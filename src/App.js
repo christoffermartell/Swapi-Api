@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import Movies from "./components/Movies";
 function App() {
-	const [people, setPeople] = useState([]);
 	const [movies, setMovies] = useState([]);
-	const [loading, setLoading] = useState([]);
 
 	const moviesUrl = "https://swapi.dev/api/films/";
 
@@ -21,11 +18,18 @@ function App() {
 	console.log("Movies - ", movies);
 	return (
 		<div className="App">
-			<Router>
-				<Switch>
-					<Route></Route>
-				</Switch>
-			</Router>
+			{movies.map((movies) => (
+				<li
+					style={{
+						border: "2px solid black",
+						fontWeight: "bold",
+						fontSize: "25px",
+						borderInline: "solid",
+					}}
+				>
+					{movies.title} <br /> {movies.created}
+				</li>
+			))}
 		</div>
 	);
 }
