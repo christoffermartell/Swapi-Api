@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Movies from "./components/Movies";
+import "./Style.css";
 function App() {
 	const [movies, setMovies] = useState([]);
 
@@ -19,15 +20,8 @@ function App() {
 	return (
 		<div className="App">
 			{movies.map((movies) => (
-				<li
-					style={{
-						border: "2px solid black",
-						fontWeight: "bold",
-						fontSize: "25px",
-						borderInline: "solid",
-					}}
-				>
-					{movies.title} <br /> {movies.created}
+				<li className="Movies">
+					{movies.title} <br /> {movies.release_date}
 				</li>
 			))}
 		</div>

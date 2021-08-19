@@ -1,0 +1,11 @@
+.Movies {
+	color: rgb(53, 51, 51);
+	border: 2px groove rgb(116, 115, 115);
+	border-radius: 5px;
+	padding: 1cm;
+	width: 200px;
+	height: 50px;
+	background-color: rgb(172, 168, 168);
+
+	margin: auto;
+}
