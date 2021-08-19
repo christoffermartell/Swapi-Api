@@ -19,19 +19,30 @@ function App() {
 		fetchMovies();
 	}, []);
 
+	const getEpisode = () => {};
+
 	console.log("Movies - ", movies);
 	return (
 		<div className="App">
 			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
-				hello world
+				OST
+				{movies.map((movies) => (
+					<ul>{movies.title}</ul>
+				))}
 			</Modal>
 			{movies.map((movies) => (
 				<ul className="Movies">
-					<button className="infoButton" onClick={() => setIsOpen(true)}>
+					<button
+						key={movies.episode_id}
+						className="infoButton"
+						onClick={() => setIsOpen(true)}
+					>
 						Information
 					</button>
 					<br></br>
-					{movies.title} <br /> {movies.release_date}
+					{movies.title} <br /> Release date : {movies.release_date}
+					<br />
+					Episode : {movies.episode_id}
 				</ul>
 			))}
 		</div>
