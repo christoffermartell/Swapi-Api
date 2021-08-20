@@ -25,9 +25,11 @@ function App() {
 	return (
 		<div className="App">
 			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
-				OST
 				{movies.map((movies) => (
-					<ul>{movies.title}</ul>
+					<ul>
+						{movies.title}
+						<br />
+					</ul>
 				))}
 			</Modal>
 			{movies.map((movies) => (

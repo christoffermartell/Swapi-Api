@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Modal({ title, charachters, open, children, onClose }) {
+export default function Modal({ title, characters, open, children, onClose }) {
 	if (!open) return null;
 
 	return (
@@ -10,7 +10,7 @@ export default function Modal({ title, charachters, open, children, onClose }) {
 				<button onClick={onClose}>Close Modal</button>
 				{children}
 				{title}
-				{charachters}
+				{characters}
 			</div>
 		</>
 	);
