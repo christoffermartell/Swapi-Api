@@ -6,7 +6,9 @@ function App() {
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [isOpen, setIsOpen] = useState(false);
+	const [characters,setCharacter] = useState([]);
 
+	const characterUrl = "https://swapi.dev/api/people/"
 	const moviesUrl = "https://swapi.dev/api/films/";
 
 	useEffect(() => {
@@ -16,11 +18,30 @@ function App() {
 			setMovies(data.results);
 		}
 
+
 		fetchMovies();
 	}, []);
 
-	const getEpisode = () => {};
+	useEffect(()=>{
+		async function fetchCharacters() {
+			let res = await fetch(characterUrl);
+			let data = await res.json();
+			setCharacter(data.results);
+		}
+		fetchCharacters();
+	},[])
 
+	
+
+	const getCharacters = () => {
+		characters.map(function(character,index){
+		return console.log(character.name); 
+	})
+	};
+
+	getCharacters();
+
+	console.log("Characters - " , characters);
 	console.log("Movies - ", movies);
 	return (
 		<div className="App">
