@@ -1,75 +1,52 @@
-import React, { useState, useEffect } from "react";
-import Movies from "./components/Movies";
-import Modal from "./components/Modal";
-import "./Style.css";
-function App() {
-	const [movies, setMovies] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [isOpen, setIsOpen] = useState(false);
-	const [characters,setCharacter] = useState([]);
+import React,{useState,useEffect} from 'react';
+import Movies from './components/Movies'
 
-	const characterUrl = "https://swapi.dev/api/people/"
-	const moviesUrl = "https://swapi.dev/api/films/";
+import MovieInfo from './components/movieInfo.js';
 
-	useEffect(() => {
-		async function fetchMovies() {
-			let res = await fetch(moviesUrl);
-			let data = await res.json();
-			setMovies(data.results);
-		}
+function App(){
+   const [starWarsMovies, setStarWarsMovie] = useState([]);
+   const [starWarsData, setstarWarsData] = useState({});
+   const [loading, setLoading] = useState(true);
+   const [view, setView] = useState('');
+    const Url = 'https://swapi.dev/api/films/'
+    
+    useEffect(() =>{
+        async function fetchMovies(){
+            let res = await fetch(Url)
+            let data = await res.json();
+            setStarWarsMovie(data.results);
+            setLoading(false)
+        }
+        fetchMovies();
+    },[]);
 
 
-		fetchMovies();
-	}, []);
+    const starWarsMoviesInformation = (movieInformation) => {
+        setstarWarsData(movieInformation)
+        setView('movieInfo')
+    }
 
-	useEffect(()=>{
-		async function fetchCharacters() {
-			let res = await fetch(characterUrl);
-			let data = await res.json();
-			setCharacter(data.results);
-		}
-		fetchCharacters();
-	},[])
-
-	
-
-	const getCharacters = () => {
-		characters.map(function(character,index){
-		return console.log(character.name); 
-	})
-	};
-
-	getCharacters();
-
-	console.log("Characters - " , characters);
-	console.log("Movies - ", movies);
-	return (
-		<div className="App">
-			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
-				{movies.map((movies) => (
-					<ul>
-						{movies.title}
-						<br />
-					</ul>
-				))}
-			</Modal>
-			{movies.map((movies) => (
-				<ul className="Movies">
-					<button
-						key={movies.episode_id}
-						className="infoButton"
-						onClick={() => setIsOpen(true)}
-					>
-						Information
-					</button>
-					<br></br>
-					{movies.title} <br /> Release date : {movies.release_date}
-					<br />
-					Episode : {movies.episode_id}
-				</ul>
-			))}
-		</div>
-	);
+switch (view){
+    case 'movieInfo':
+        return(
+            <div>
+            <MovieInfo setView={setView} starWarsData={starWarsData} />
+            </div> 
+        )
+        default:
+            return(
+                <div className="Movies">
+                    <div>{loading ? <h1>Loading....</h1> :(<div>
+                        <h1 className="starWarsTitle">Swapi Api</h1>
+                    
+                       {starWarsMovies.map((movies,i) =>{
+                           
+                           return <Movies key={i} movies = {movies} starWarsMoviesInformation={starWarsMoviesInformation} />
+                       })}
+                    </div>
+                    ) }
+                </div>   
+                </div>
+            )}
 }
-
 export default App;
